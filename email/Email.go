@@ -1,9 +1,10 @@
-package main
+package email
 
 import (
 	"fmt"
 	"github.com/astaxie/beego/utils"
 	"strings"
+	"utils/time"
 )
 
 // SendEmail
@@ -11,7 +12,6 @@ import (
 //	@Description: 邮箱验证码
 //	@param toEmail 请求验证码的邮箱
 //	@param msg	验证码
-
 func SendEmail(toEmail, msg string) {
 	username := "*" // 发送者的邮箱地址
 	password := "*" // 授权密码
@@ -31,7 +31,7 @@ func SendEmail(toEmail, msg string) {
 	emailConn.To = []string{strings.TrimSpace(toEmail)}
 	emailConn.Subject = "注册验证码"
 	//注意这里我们发送给用户的是激活请求地址  传入秒数
-	emailConn.Text = fmt.Sprintf("您的注册验证码为 [ %s ] ,有效期至[ %s ]。", msg, GetCurrentTime(60))
+	emailConn.Text = fmt.Sprintf("您的注册验证码为 [ %s ] ,有效期至[ %s ]。", msg, time.GetCurrentTime(60))
 	err := emailConn.Send()
 	if err != nil {
 		fmt.Println(err)

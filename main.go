@@ -1,5 +1,7 @@
 package main
 
+import "utils/time"
+
 func main() {
-	GetCurrentTime(60)
+	time.GetCurrentTime(60)
 }
